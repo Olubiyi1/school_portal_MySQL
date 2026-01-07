@@ -1,0 +1,3 @@
+students.map((a)=>{
+    a
+})
