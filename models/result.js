@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey:"user_id",
         as:"user"
       })
+      Result.belongsTo(models.Term,{
+        foreignKey:"term_id",
+        as:"term"
+      })
     }
   }
   Result.init({

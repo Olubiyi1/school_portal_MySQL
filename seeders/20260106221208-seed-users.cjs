@@ -10,7 +10,7 @@ module.exports = {
         last_name:"Olubiyi",
         email:"olubiyibabajide@gmail.com",
         password:"123456789",
-        role_id:28,
+        role_id:37,
         class_id:null,
         created_at:new Date(),
         updated_at:new Date()
@@ -20,7 +20,7 @@ module.exports = {
         last_name:"Azeez",
         email:"Az@gmail.com",
         password:"123456789",
-        role_id:29,
+        role_id:38,
         class_id:null,
         created_at:new Date(),
         updated_at:new Date()
@@ -29,8 +29,8 @@ module.exports = {
       last_name:"Abiola",
       email:"owolabi@gmail.com",
       password:"123456789",
-      role_id:30,
-      class_id:28,
+      role_id:39,
+      class_id:37,
       created_at:new Date(),
       updated_at:new Date()
       },
@@ -39,8 +39,8 @@ module.exports = {
       last_name:"Damilola",
       email:"dami@gmail.com",
       password:"123456789",
-      role_id:30,
-      class_id:29,
+      role_id:39,
+      class_id:38,
       created_at:new Date(),
       updated_at:new Date()
       },
@@ -49,8 +49,8 @@ module.exports = {
       last_name:"Eno",
       email:"tom@gmail.com",
       password:"123456789",
-      role_id:30,
-      class_id:30,
+      role_id:39,
+      class_id:39,
       created_at:new Date(),
       updated_at:new Date()
       }

@@ -18,6 +18,8 @@ module.exports = {
       {id:49},
       {id:50}
     ]
+    
+    const term={id:1}
     // defining scores for each student per subject
     const scores = {
       23:{46:70,47:60,48:45,49:80,50:70},
@@ -39,7 +41,7 @@ module.exports = {
     const results = students.flatMap((student)=>{
       return subjects.map((subject)=>{
         return {
-          term:"First term",
+          term_id:term.id,
           student_id: student.id,
           subject_id: subject.id,
           score: scores[student.id][subject.id],
@@ -50,10 +52,10 @@ module.exports = {
     })
 
 
-    await queryInterface.bulkInsert("Results",results),
+    await queryInterface.bulkInsert("Results",results,
     {
       ignoreDuplicates:true
-    }
+    })
   },
 
   async down (queryInterface, Sequelize) {
