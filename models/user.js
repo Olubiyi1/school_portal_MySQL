@@ -5,10 +5,6 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      User.belongsTo(models.Role,{
-        foreignKey:"role_id",
-        as:"role"
-      })
 
       User.belongsTo(models.Class,{
         foreignKey:"class_id",
@@ -32,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     password:{type:DataTypes.STRING,
       allowNull:false
+    },
+    role:{
+      type:DataTypes.ENUM("admin","teacher","student"),
+      allowNull:false,
+      defaultValue:"student"
     }
   }, {
     sequelize,

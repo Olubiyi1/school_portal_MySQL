@@ -22,6 +22,10 @@ export const validationMessages = {
     "string.min": "Password must be at least 8 characters long",
     "string.max": "Password cannot exceed 30 characters",
     "string.pattern.base":"Password must include uppercase, lowercase, number, and special character",
+  },
+  role:{
+    "any.only":"role must be one of admin,teacher or student" ,
+    "string.empty":"role cannot be empty",
   }
 };
 
