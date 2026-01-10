@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       })
       Result.belongsTo(models.Term,{
         foreignKey:"term_id",
-        as:"term"
+        as:"termInfo"
       })
     }
   }

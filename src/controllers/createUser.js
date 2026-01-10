@@ -1,20 +1,36 @@
-const {userModel} = require("../../models/user.js")
+// const {User} = require("../../models/user.js");
 
-const createUserTest = async(req,res)=>{
-    try{
-        const user = await userModel.createUser({
-            firstName:"Sakira",
-            lastNmae:"Bilikisu",
-            email:"bili@gmail.com",
-            password:"123456"
+const models = require("../../models");
 
-        })
-        res.status(201).json({message:"user created successfully",user})
-    }
-    catch(err){
-        res.status(500).json({message:"error creating user",err:err.message})
-        
-    }
-}
+console.log("MODELS KEYS 👉", Object.keys(models));
 
-module.exports = createUserTest()
+const { User } = models;
+console.log("USER 👉", User);
+
+
+const createUserTest = async (req, res) => {
+  console.log("i reach here");
+  
+  try {
+    console.log("try block");
+    
+    const user = await User.create({
+      firstName: "Ade",
+      lastName: "Tom",
+      email: "bol@gmail.com",
+      password: "123456",
+      class_id:38
+    });
+    console.log("signin dey here");
+    
+    res.status(201).json({ message: "User created successfully", user });
+  } catch (err) {
+    res.status(500).json({ message: "Error creating user", error: err.message });
+    console.log("i reach here");
+    console.log(err);
+    
+    
+  }
+};
+
+module.exports = createUserTest;

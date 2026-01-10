@@ -1,9 +1,8 @@
+const createUserTest = require("../controllers/createUser")
 const express = require("express")
-const { createUserTest }= require("../controllers/createUser.js")
 
+const UserRouter = express.Router()
 
- const UserRoute = express.Router()
+UserRouter.post("/create-user",createUserTest)
 
-UserRoute.post("/create-user",createUserTest)
-
-
+module.exports = UserRouter
