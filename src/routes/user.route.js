@@ -1,8 +1,9 @@
-const createUserTest = require("../controllers/createUser")
+const userController = require("../controllers/userController")
 const express = require("express")
 
 const UserRouter = express.Router()
 
-UserRouter.post("/create-user",createUserTest)
+UserRouter.post("/register",userController.signUp)
+UserRouter.post("/login",userController.signIn)
 
 module.exports = UserRouter
