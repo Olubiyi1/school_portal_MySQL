@@ -3,23 +3,35 @@
 const comparePassword = require("../guards/comparePassword")
 const {User} = require("../../models")
 const hashPassword = require("../guards/hashpassword")
+const { where } = require("sequelize")
+const { use } = require("../routes/user.route")
+const { response } = require("express")
 
 class userService{
     
  static registerUser = async(data)=>{
-
     try{
-        const hashedPassword = await hashPassword(data.password)
+        const {email,firstName,lastName,password}=data
+
+        // existing user
+
+        const existingUser = await User.findOne({where:{email}})
+
+        if(existingUser){
+            throw new Error("User already exists")
+        }
+        // hash password
+        const hashedPassword = await hashPassword(password)
     const user =await User.create({
-        email:data.email,
-        firstName:data.firstName,
-        lastName:data.lastName,
-       password: hashedPassword
+       firstName,
+       lastName,
+       email,
+       password:hashedPassword
     })
     return user
     }
     catch(error){
-        throw new Error ("user registration failed")
+        throw new Error (error.message || "user registration failed")
     }
 }
 
@@ -42,6 +54,22 @@ static userLogin = async(data)=>{
       }
     }catch(error){
         throw new Error("user login failed")
+    }
+}
+
+static getSingleUser =async (id)=>{
+
+    try{
+        const user = await User.findByPk(id);
+        if(!user){
+            throw new Error ("User not found")
+        }
+
+        return user;
+
+    }
+    catch(error){
+        throw new Error(error.message || "error getting user")
     }
 }
 
