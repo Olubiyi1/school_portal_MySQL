@@ -16,5 +16,10 @@ app.listen(PORT, () => {
 app.get("/api",(req,res)=>{
     res.json({message:"welcome o"})
 })
+app.get("/protected",(req,res)=>{
+    res.json({
+        message:"u reach here"
+    })
+})
 
 app.use("/api",UserRouter)

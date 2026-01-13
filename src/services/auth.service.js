@@ -3,9 +3,8 @@
 const comparePassword = require("../guards/comparePassword")
 const {User} = require("../../models")
 const hashPassword = require("../guards/hashpassword")
-const { where } = require("sequelize")
-const { use } = require("../routes/user.route")
-const { response } = require("express")
+const createJwt = require("../guards/createJwt")
+
 
 class userService{
     
@@ -44,16 +43,26 @@ static userLogin = async(data)=>{
         if(!user){
             throw new Error ("invalid email or password")
         }
-      const isPasswordvalid = await comparePassword(password,user.password)
-      if(!isPasswordvalid){
+      const isPasswordValid = await comparePassword(password,user.password)
+      if(!isPasswordValid){
         throw new Error("invlaid username or password")
       }
-      return {
+
+      const token= createJwt({
         id:user.id,
         email:user.email,
+        role:user.role
+      }) 
+      return {
+        token,
+        user:{
+            id:user.id,
+            email:user.email,
+            role:user.role
+        }
       }
     }catch(error){
-        throw new Error("user login failed")
+        throw new Error(error.message)
     }
 }
 
