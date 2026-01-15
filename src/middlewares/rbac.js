@@ -8,12 +8,11 @@ const rbac = (allowedRoles)=>{
                 message:"Unauthorized, please log in"
             })
         }
-
+        const userRole = req.user.role
         // extract role from the jwt payload
-
         if(!allowedRoles.includes(userRole)){
             return res.status(403).json({
-                message:"forbiddne:you do not have access to this route"
+                message:"forbidden:you do not have access to this route"
             })
         }
         // user has the permission

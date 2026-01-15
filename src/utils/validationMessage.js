@@ -26,6 +26,10 @@ export const validationMessages = {
   role:{
     "any.only":"role must be one of admin,teacher or student" ,
     "string.empty":"role cannot be empty",
+  },
+  name:{
+    "any.required":"Please enter a subject",
+    "string.empty":"Subject cannot be empty"
   }
 };
 

@@ -5,8 +5,9 @@ const authMiddleware = require("../middlewares/authMiddleware")
 
 const UserRouter = express.Router()
 
-UserRouter.post("/register",authMiddleware,rbac(["admin"]),userController.signUp)
+UserRouter.post("/register",userController.signUp)
 UserRouter.post("/login",userController.signIn)
-UserRouter.get("/:id",userController.getUser)
+
+UserRouter.get("/:id",authMiddleware,rbac(["admin"]),userController.getUser)
 
 module.exports = UserRouter
