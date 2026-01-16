@@ -1,7 +1,8 @@
 const {Joi} = require("joi")
 const validationMessages = require("../../src/validationschema")
 
-const createUserValidation = Joi.object({
+class UserValidationSchema {
+ static createUserValidation = Joi.object({
   firstName: Joi.string().trim().min(3).max(50).required().messages({
     "any.required": validationMessages.firstName["any.required"],
     "string.empty": validationMessages.firstName["string.empty"],
@@ -47,7 +48,7 @@ const createUserValidation = Joi.object({
     })
 });
 
-const loginUserValidation = Joi.object({
+static loginUserValidation = Joi.object({
 
   email: Joi.string()
     .email({ tlds: { allow: false } })
@@ -74,7 +75,6 @@ const loginUserValidation = Joi.object({
     }),
 })
 
-module.exports={
-  createUserValidation,
-  loginUserValidation
 }
+
+ module.exports = UserValidationSchema
