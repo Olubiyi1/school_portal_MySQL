@@ -1,34 +1,54 @@
 // const {User} = require("../../models/user.js");
+import { createUserValidation,loginUserValidation } from "../validationschema/user.validation";
 
-const models = require("../../models");
+// const models = require("../../models");
 const userService = require("../services/auth.service")
 
 class userController{
 
   static signUp = async (req, res) => {
-  console.log("i reach here");
-  
   try {
 
-    const user = await userService.registerUser(req.body)
+    // validate input using the joi validation before service
+    const {error,value} = createUserValidation.validate(req.body,{
+
+      // abortEarly returns all errors (checks all fields)
+      // stripUnknown :true removes all unwanted field not in the schema
+      abortEarly:false,
+      stripUnknown:true
+    })
+
+      // error.details is an array (could contain multiple errors)
+        // [0] → we just grab the first error for simplicity
+        // // .message → the human-readable string
+    if(error){
+      return res.status(400).json({
+        message:error.details[0].message
+      })
+    }
+
+    const user = await userService.registerUser(value)
+    
     res.status(201).json({ message: "User created", user });
   } catch (err) {
 
     res.status(500).json({ message: "Error creating user", error: err.message });
-    console.log("i reach here");
     console.log(err);
-    
-    
+
   }
 };
 
 static signIn = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { error,value } = loginUserValidation.validate(req.body);
 
-    if (!email || !password) {
-      return res.status(400).json({ message: "Email and password required" });
+    if(error){
+        return res.status(400).json({
+        message:error.details[0].message
+      })
     }
+
+    const{email,password} = value
 
     const user = await userService.userLogin({ email, password });
 
