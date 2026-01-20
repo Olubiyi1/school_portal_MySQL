@@ -5,7 +5,7 @@ class ResponseHandler{
             data
         })
     }
-    static created (res,message = "Created successfully",data = null) {
+    static success (res,message = "Created successfully",data = null) {
         return res.status(201).json({
             message,
             data
@@ -44,7 +44,6 @@ class ResponseHandler{
     }
     static serverError (res,message = "Internal Server Error") {
         return res.status(500).json({
-            res,
             message
         })
     }

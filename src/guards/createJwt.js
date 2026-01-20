@@ -9,7 +9,7 @@ const createJwt = (user) => {
       role: user.role,
     },
     process.env.SECRET_KEY,
-    { expiresIn: "1hr" }
+    { expiresIn: "7d" }
   );
 };
 module.exports = createJwt;

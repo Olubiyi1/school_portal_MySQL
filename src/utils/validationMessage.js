@@ -1,4 +1,4 @@
-export const validationMessages = {
+const validationMessages = {
   firstName: {
     "any.required": "Please enter firstname",
     "string.empty": "Firstname cannot be empty",
@@ -33,3 +33,4 @@ export const validationMessages = {
   }
 };
 
+module.exports = validationMessages

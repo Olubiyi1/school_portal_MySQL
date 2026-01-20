@@ -1,14 +1,13 @@
 const jwt = require("jsonwebtoken");
-require("dotenv").config()
+require("dotenv").config();
 
 const authMiddleware = (req, res, next) => {
-
-    // Reads the Authorization header from the request.
-    // .split(" ")[1] extracts the actual token string (after “Bearer”).
-    // The ?. ensures it doesn’t crash if the header is missing.
+  // Reads the Authorization header from the request.
+  // .split(" ")[1] extracts the actual token string (after “Bearer”).
+  // The ?. ensures it doesn’t crash if the header is missing.
   const token = req.headers["authorization"]?.split(" ")[1];
 
-//   Checks if the token exists.
+  //   Checks if the token exists.
 
   if (!token) {
     return res.status(401).json({ message: "Unauthorized: no token provided" });
@@ -17,7 +16,7 @@ const authMiddleware = (req, res, next) => {
   try {
     // Verifies the token using your secret key
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
-
+  
     req.user = {
       id: decoded.id,
       email: decoded.email,
@@ -25,8 +24,9 @@ const authMiddleware = (req, res, next) => {
     };
 
     next();
-    
   } catch (err) {
+    console.log(err.message);
+
     return res.status(401).json({ message: "Unauthorized: invalid token" });
   }
 };

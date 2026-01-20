@@ -12,5 +12,7 @@ const sequelize = new Sequelize(
         logging:false
     }
 )
+console.log("db connection successful");
+
 
 module.exports = sequelize

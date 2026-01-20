@@ -69,6 +69,10 @@ static userLogin = async(data)=>{
 static getSingleUser =async (id)=>{
 
     try{
+        if(!id){
+            throw new Error("User Id is required")
+        }
+
         const user = await User.findByPk(id);
         if(!user){
             throw new Error ("User not found")
@@ -82,7 +86,43 @@ static getSingleUser =async (id)=>{
     }
 }
 
+static updateUser = async(id,updatedData)=>{
 
+    try{
+        if(!id){
+            throw new Error ("User Id is required")
+        }
+        if(!updatedData){
+            throw new Error ("User data cannot be empty")
+        }
+
+        const user = await User.findByPk(id);
+        if(!user){
+            throw new Error("User not found")
+        }
+        await user.update(updatedData)
+    }
+    catch(error){
+        throw new Error(error.message || "User update failed")
+    }
+}
+
+static deleteUser = async(id)=>{
+    try{
+        if(!id){
+            throw new Error("user id is required")
+        }
+        const deletedCount = await User.destroy({where:{id}})
+
+        if(deletedCount === 0 ){
+            throw new Error ("user not found")
+        }
+        return deletedCount;
+    }
+    catch(error){
+        throw new Error("Error deleting user")
+    }
+}
 }
 
 module.exports = userService

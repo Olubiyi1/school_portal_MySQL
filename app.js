@@ -6,6 +6,7 @@ const UserRouter = require("./src/routes/user.route")
 const app = express()
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 
 const PORT =5000;
 
@@ -22,4 +23,4 @@ app.get("/protected",(req,res)=>{
     })
 })
 
-app.use("/api",UserRouter)
+app.use("/api/users",UserRouter)

@@ -1,7 +1,8 @@
-const {Joi} = require("joi")
-const validationMessages = require("../../src/validationschema")
+const Joi = require("joi")
+const validationMessages = require("../utils/validationMessage")
 
 class UserValidationSchema {
+
  static createUserValidation = Joi.object({
   firstName: Joi.string().trim().min(3).max(50).required().messages({
     "any.required": validationMessages.firstName["any.required"],
