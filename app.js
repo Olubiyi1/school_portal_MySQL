@@ -1,6 +1,7 @@
 const express = require("express")
 require("dotenv").config()
 const UserRouter = require("./src/routes/user.route")
+const subjectsRouter = require("./src/routes/subject.route")
 
 
 const app = express()
@@ -24,3 +25,4 @@ app.get("/protected",(req,res)=>{
 })
 
 app.use("/api/users",UserRouter)
+app.use("/api/subjects",subjectsRouter)

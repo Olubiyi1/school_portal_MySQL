@@ -1,6 +1,7 @@
 // controllers/userController.js
 const userService = require("../services/auth.service");
 const ResponseHandler = require("../utils/responseHandler");
+const { role } = require("../utils/validationMessage");
 
 class UserController {
   // Signup controller
@@ -54,6 +55,17 @@ class UserController {
       return ResponseHandler.serverError(res, "Error Fetching user");
     }
   };
+
+  static getAllStudents = async(req,res)=>{
+    try{
+      const students = await userService.getAllStudents({role:"student"})
+      return ResponseHandler.success(res,"all students retrived",students)
+    }
+    catch(error){
+      return ResponseHandler.serverError(res,"Error fetching students")
+    }
+  }
+  
   static updateMyProfile = async (req, res) => {
     try {
       

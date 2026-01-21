@@ -8,11 +8,19 @@ const UserValidationSchema = require("../validationschema/user.validation")
 
 const UserRouter = express.Router()
 
+// public routes
 UserRouter.post("/register",validate(UserValidationSchema.createUserValidation),userController.signUp)
 UserRouter.post("/login",validate(UserValidationSchema.loginUserValidation),userController.signIn)
-UserRouter.patch("/me/profile",authMiddleware,userController.updateMyProfile)
-UserRouter.patch("/:id",authMiddleware,rbac(["admin"]),userController.updateUserByAdmin)
-UserRouter.delete("/:id",authMiddleware,rbac(["admin"]),userController.deletedUser)
-UserRouter.get("/:id",authMiddleware,rbac(["admin"]),userController.getUser)
+
+// auth route
+UserRouter.patch("/me",authMiddleware,userController.updateMyProfile)
+
+// admin routes
+UserRouter.use(authMiddleware,rbac(["admin"]))
+
+UserRouter.get("/students",userController.getAllStudents)
+UserRouter.patch("/:id",userController.updateUserByAdmin)
+UserRouter.delete("/:id",userController.deletedUser)
+UserRouter.get("/:id",userController.getUser)
 
 module.exports = UserRouter

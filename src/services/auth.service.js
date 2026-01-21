@@ -4,6 +4,7 @@ const comparePassword = require("../guards/comparePassword")
 const {User} = require("../../models")
 const hashPassword = require("../guards/hashpassword")
 const createJwt = require("../guards/createJwt")
+const { role } = require("../utils/validationMessage")
 
 
 class userService{
@@ -83,6 +84,17 @@ static getSingleUser =async (id)=>{
     }
     catch(error){
         throw new Error(error.message || "error getting user")
+    }
+}
+
+static getAllStudents = async()=>{
+
+    try{
+        const students = await User.findAll({where:{role:"student"}})
+        return students;
+    }
+    catch(error){
+        throw new Error("Error getting all students")
     }
 }
 
