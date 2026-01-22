@@ -19,7 +19,7 @@ UserRouter.patch("/me",authMiddleware,userController.updateMyProfile)
 UserRouter.use(authMiddleware,rbac(["admin"]))
 
 UserRouter.get("/students",userController.getAllStudents)
-UserRouter.patch("/:id",userController.updateUserByAdmin)
+UserRouter.patch("/:id",validate(UserValidationSchema.adminUserUpdateValidationSchema),userController.updateUserByAdmin)
 UserRouter.delete("/:id",userController.deletedUser)
 UserRouter.get("/:id",userController.getUser)
 

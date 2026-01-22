@@ -59,5 +59,4 @@ class SubjectController {
     }
   };
 }
-
 module.exports = SubjectController;
