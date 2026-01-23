@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const ResponseHandler = require("../utils/responseHandler");
+const { message } = require("../validationschema/subject.validation");
 
 const authMiddleware = (req, res, next) => {
   // Reads the Authorization header from the request.
@@ -10,7 +12,7 @@ const authMiddleware = (req, res, next) => {
   //   Checks if the token exists.
 
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized: no token provided" });
+    return ResponseHandler.unauthorized(res,"Unauthorized: token missing")
   }
 
   try {
@@ -27,7 +29,7 @@ const authMiddleware = (req, res, next) => {
   } catch (err) {
     console.log(err.message);
 
-    return res.status(401).json({ message: "Unauthorized: invalid token" });
+    return ResponseHandler.unauthorized(res,"Unauthorized: invalid token",err.message)
   }
 };
 
