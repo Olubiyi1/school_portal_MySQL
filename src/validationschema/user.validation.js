@@ -29,7 +29,7 @@ class UserValidationSchema {
       .trim()
       .min(8)
       .max(30)
-      .pattern(new RegExp("^[a-zA-Z0-9_]+$"))
+      .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\[\]{};':"\\|,.<>\/?-]).+$/)
       .required()
       .messages({
         "any.required": validationMessages.password["any.required"],
